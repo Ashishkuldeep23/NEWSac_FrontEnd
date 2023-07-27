@@ -4,9 +4,6 @@
 }
 
 
-:root{
-    --border_color : "black";
-    --theme : "red"
-
-
+html{
+    width: 98.5vw;
 }

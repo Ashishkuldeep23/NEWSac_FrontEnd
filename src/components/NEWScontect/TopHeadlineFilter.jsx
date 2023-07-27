@@ -5,7 +5,7 @@ import "./style.css"
 import { useRef, useState, useEffect } from "react"
 
 
-function TopHeadlineFilter({ contentArr, getData, filterOnTop, setFilterOnTop }) {
+function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filterOnTop, setFilterOnTop }) {
 
   const categoryRef = useRef("")
   const sortByRef = useRef("")
@@ -19,7 +19,11 @@ function TopHeadlineFilter({ contentArr, getData, filterOnTop, setFilterOnTop })
 
 
 
+  // getAllQueriesOfFilter({articalCategory , articalSortBy , articalCountry})
 
+
+
+  // // // This hook is used to set value of reload
   useEffect(() => {
 
     setArticalCategory(categoryRef.current.value)
@@ -30,20 +34,25 @@ function TopHeadlineFilter({ contentArr, getData, filterOnTop, setFilterOnTop })
 
 
 
-
+  
+  // // // This is filter handler function -------->
   function filterHandler(e) {
 
-    console.log(categoryRef.current.value)
-    console.log(sortByRef.current.value)
-    console.log(countryRef.current.value)
+    // console.log(categoryRef.current.value)
+    // console.log(sortByRef.current.value)
+    // console.log(countryRef.current.value)
+
+
+    // // // Sending Query to actual get data Api
+    getAllQueriesOfFilter({articalCategory : articalCategory , articalSortBy : articalSortBy, articalCountry : articalCountry })
 
 
     // // // calling getData function that gets data from backend and sets into main contant Arr.
-    getData(1, articalCategory, articalSortBy, articalCountry, 20)
+    getData(1, articalCategory, articalSortBy, articalCountry, 20 )
 
 
 
-    alert("Ready to get ")
+    // alert("Ready to get ")
   }
 
 
