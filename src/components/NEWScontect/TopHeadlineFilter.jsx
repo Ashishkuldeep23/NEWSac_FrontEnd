@@ -75,8 +75,8 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
 
               <label htmlFor="category" >Category</label>
               <select ref={categoryRef} value={articalCategory} onChange={(e) => { setArticalCategory(e.target.value) }} name="" id="category" >
-                <option value="business">business</option>
                 <option value="entertainment">entertainment</option>
+                <option value="business">business</option>
                 <option value="general" >general</option>
                 <option value="health" >health</option>
                 <option value="science" >science</option>
@@ -93,10 +93,12 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
 
               <label htmlFor="country">Country</label>
               <select ref={countryRef} value={articalCountry} onChange={(e) => { setArticalCountry(e.target.value) }} name="" id="country" >
-                <option value="in">in : India</option>
-                <option value="us">us : USA</option>
-                <option value="au" >au : Australia</option>
-
+                <option value="in">IN : India</option>
+                <option value="us">US : USA</option>
+                <option value="au" >AU : Australia</option>
+                <option value="nz" >NZ : New Zealand</option>
+                <option value="ru" >RU : Russia</option>
+                <option value="sa" >SA : South Africa</option>
               </select>
 
 

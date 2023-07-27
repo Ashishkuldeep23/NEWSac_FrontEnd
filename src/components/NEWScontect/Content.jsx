@@ -176,12 +176,13 @@ function Content() {
                 Array.from(Array(totalPagesAre), (el, i) => {
                   return( 
                   <p 
-                    key={i} 
-                    className={(presentVisiblePage == i+1) ? "btn btn-primary mx-2" : "btn btn-outline-primary mx-2"} 
+                    key={i} id={i+1}
+                    className={(presentVisiblePage === i+1) ? "btn btn-primary mx-2" : "btn btn-outline-primary mx-2"} 
                     onClick={(e) => { 
-                      console.log(presentVisiblePage);
+                      // console.log(presentVisiblePage);     // // //
                       setPresentVisiblePage(i+1); 
-                      return getData(e.target.innerHTML, allQueryObject.articalCategory , allQueryObject.articalSortBy , allQueryObject.articalCountry , 20) 
+                      // console.log(e.target.id);    // // // Setting id = i+1 that's why taking id insted of innerHtml
+                      return getData(e.target.id, allQueryObject.articalCategory , allQueryObject.articalSortBy , allQueryObject.articalCountry , 20) 
                     }}
                   >
                     {
