@@ -1,43 +1,127 @@
 import React from "react";
 
-function TopHeadlineFilter({ filterOnTop, setFilterOnTop }) {
+import "./style.css"
+
+import { useRef, useState, useEffect } from "react"
+
+
+function TopHeadlineFilter({ contentArr, getData, filterOnTop, setFilterOnTop }) {
+
+  const categoryRef = useRef("")
+  const sortByRef = useRef("")
+  const countryRef = useRef("")
+
+
+  const [articalCategory, setArticalCategory] = useState("")
+  const [articalSortBy, setArticalSortBy] = useState("")
+  const [articalCountry, setArticalCountry] = useState("")
+
+
+
+
+
+  useEffect(() => {
+
+    setArticalCategory(categoryRef.current.value)
+    setArticalSortBy(sortByRef.current.value)
+    setArticalCountry(countryRef.current.value)
+
+  }, [])
+
+
+
+
+  function filterHandler(e) {
+
+    console.log(categoryRef.current.value)
+    console.log(sortByRef.current.value)
+    console.log(countryRef.current.value)
+
+
+    // // // calling getData function that gets data from backend and sets into main contant Arr.
+    getData(1, articalCategory, articalSortBy, articalCountry, 20)
+
+
+
+    alert("Ready to get ")
+  }
+
+
+
   return (
-    <div >
-      <h3 className="d-inline me-2">Im Filter box</h3>
-      <button className="d-none d-sm-inline btn btn-outline-danger px-1 py-0 " onClick={()=>{setFilterOnTop(!filterOnTop)}}>
-        {filterOnTop ?<i className="fa-solid fa-hand-point-left"></i>: <i className="fa-solid fa-hand-point-up"></i>}
+    <div className="my-3">
+      <h3 className="d-sm-inline me-2  text-center">Filter Articles</h3>
+      <button className="d-none d-sm-inline btn btn-outline-danger px-1 py-0 " onClick={() => { setFilterOnTop(!filterOnTop) }}>
+        {filterOnTop ? <i className="fa-solid fa-hand-point-left"></i> : <i className="fa-solid fa-hand-point-up"></i>}
       </button>
-      <p>
-        Contrary to popular belief, Lorem Ipsum is not simply random text. It
-        has roots in a piece of classical Latin literature from 45 BC, making it
-        over 2000 years old. Richard McClintock, a Latin professor at
-        Hampden-Sydney College in Virginia, looked up one of the more obscure
-        Latin words, consectetur, from a Lorem Ipsum passage, and going through
-        the cites of the word in classical literature, discovered the
-        undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33
-        of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by
-        Cicero, written in 45 BC. This book is a treatise on the theory of
-        ethics, very popular during the Renaissance. The first line of Lorem
-        Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section
-        1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is
-        reproduced below for those interested. Sections 1.10.32 and 1.10.33 from
-        "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their
-        exact original form, accompanContrary to popuar belief, L Ipsum is not
-        simply random text. It has roots in a piece of classical Latin
-        literature from 45 BC, making it over 2000 years old. Richard
-        McClintock, a Latin professor at Hampden-Sydney College in Virginia,
-        looked up one of the more obscure Latin words, consectetur, from a Lorem
-        Ipsum passage, and going through the cites of the word in classical
-        literature, discovered the undoubtable source. Lorem Ipsum comes from
-        sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The
-        Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a
-        treatise on the theory of ethics, very popular during the Renaissance.
-        The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes
-        from a line in section 1.10.32. The standard chunk of Lorem Ipsum used
-        since the 1500s is reproduced below for those interested. Sections
-        1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are
-        also reproduced in their exact original form, accompan
-      </p>
+
+
+      <div className="filter_Content flex-sm-column align-items-center">
+
+
+        {
+          (contentArr.length > 0)
+            ?
+            <div className="all_selects">
+
+              <label htmlFor="category" >Category</label>
+              <select ref={categoryRef} value={articalCategory} onChange={(e) => { setArticalCategory(e.target.value) }} name="" id="category" >
+                <option value="business">business</option>
+                <option value="entertainment">entertainment</option>
+                <option value="general" >general</option>
+                <option value="health" >health</option>
+                <option value="science" >science</option>
+                <option value="sports" >sports</option>
+                <option value="technology" >technology</option>
+
+              </select>
+
+              <label htmlFor="sort_by">Sorty by</label>
+              <select ref={sortByRef} value={articalSortBy} onChange={(e) => { setArticalSortBy(e.target.value) }} name="" id="sort_by" >
+                <option value="popularity">popularity</option>
+                <option value="publishedAt">publishedAt</option>
+              </select>
+
+              <label htmlFor="country">Country</label>
+              <select ref={countryRef} value={articalCountry} onChange={(e) => { setArticalCountry(e.target.value) }} name="" id="country" >
+                <option value="in">in : India</option>
+                <option value="us">us : USA</option>
+                <option value="au" >au : Australia</option>
+
+              </select>
+
+
+            </div>
+            :
+            <div className="all_selects">
+
+              {
+                Array.from(Array(3), (el, i) => {
+                  return (
+                    < div key={i} className="all_selects">
+                      <label key={i} htmlFor="">Loading...</label>
+                      <select  name="" id="" >
+                        <option value="A">***</option>
+                        <option value="B">**</option>
+                        <option value="C" >*</option>
+
+                      </select>
+                    </ div >
+                  )
+                })
+              }
+
+            </div>
+        }
+
+
+
+        <button className="px-2 m-1 ms-sm-auto btn btn-outline-success text-white fw-bold" onClick={(e) => (contentArr.length > 0) ? filterHandler(e) : alert("Data is coming , please wait") }>{ (contentArr.length > 0) ? "Filter" : "Coming" }</button>
+
+
+
+      </div>
+
     </div>
   );
 }

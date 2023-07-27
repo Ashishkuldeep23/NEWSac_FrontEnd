@@ -11,18 +11,18 @@ import TopHeadlineFilter from "./TopHeadlineFilter";
 import SingleCardOfNews from "./SingleNewsCard";
 
 function Content() {
-  const [dataStatus, setDataStatus] = useState("");
+  const [dataStatus, setDataStatus] = useState("");             // // // This tells status of data , showing or not
 
-  const [contentArr, setContentArr] = useState([]);
+  const [contentArr, setContentArr] = useState([]);             // // // Main News contanted
 
-  const [filterOnTop, setFilterOnTop] = useState(false);
+  const [filterOnTop, setFilterOnTop] = useState(false);         // // // Filter div position
 
-  const [currentPage, setCurrentPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);          // // // Number of pages 
 
 
 
   // // // ----------------- Fetch data from backend top-headings -----------
-  async function getData(page = 1, category = "", pageSize = 20, country = "in") {
+  async function getData(page = 1 ,  category = "" , sortBy = "publishedAt",  country = "in" , pageSize = 20,) {
 
     setContentArr([])  // // // set array empty to show data getting
 
@@ -32,7 +32,7 @@ function Content() {
 
     try {
       const request = await axios(
-        `https://free-apis-back-end.vercel.app/newsac/top-headlines?country=${country}&sortBy=publishedAt&page=${page}&category=${category}&pageSize=${pageSize}`
+        `https://free-apis-back-end.vercel.app/newsac/top-headlines?country=${country}&sortBy=${sortBy}&page=${page}&category=${category}&pageSize=${pageSize}`
       );
 
       console.log(request);
@@ -90,15 +90,18 @@ function Content() {
         <h2>Search</h2>
       </div>
 
-      <div
+      <div style={ {backgroundColor : "darkblue"} }
         className={
           filterOnTop
-            ? "col-12  px-4 bg-warning h-100 "
-            : "col-sm-2 ps-4 border border-warning  h-100"
+            ? "col-12  px-4  h-100 "
+            : "col-sm-2 ps-4   h-100"
         }
       >
         {" "}
         <TopHeadlineFilter
+          contentArr={contentArr} 
+          getData={getData}
+
           filterOnTop={filterOnTop}
           setFilterOnTop={setFilterOnTop}
         />
@@ -167,8 +170,6 @@ function Content() {
                     })
 
                   }
-
-
                 </div>
 
 

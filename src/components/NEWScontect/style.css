@@ -1,3 +1,5 @@
+
+
 #main_container {
   padding: 1rem;
 }
@@ -67,6 +69,40 @@
   font-style: italic;
 }
 
+
+/* Top-heading filter css here  */
+
+
+.all_selects > label{
+  border-top: 1px solid #adb5bd;
+
+
+  /* border-bottom-color: black; */
+  border-radius: 2vh;
+  margin-top: 1vh;
+  padding: 0 1vh;
+  width: 98%;
+}
+
+.all_selects > select{
+  width: 98%;
+  
+  border-bottom-left-radius: 2vh;
+  border-bottom-right-radius: 2vh;
+
+  background-color: #adb5bdbf;
+  color: white;
+  font-weight: bold;
+  padding: 0 1vh;
+  text-transform: capitalize;
+}
+
+
+
+
+
+
+
 /* Web Skeleton code here  */
 
 .skeleton {
@@ -95,3 +131,20 @@
 .skeleton_single > h3{
   font-size: 3rem;
 }
+
+
+
+
+
+
+
+/* breakpoints -----> */
+
+
+@media (max-width : 574px) {
+  .all_selects {
+    width: 80%;
+  }
+  
+}
+
