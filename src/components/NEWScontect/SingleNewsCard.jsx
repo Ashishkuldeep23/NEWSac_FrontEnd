@@ -57,12 +57,12 @@ function SingleCardOfNews({
       <h4 className="title">{title || "Title of NEWS"}</h4>
 
       <div className="side_by_side">
-        <p className="author_of_article">{author || "Writer"}</p>
+        <p className="author_of_article">By -:{author || "Writer"}</p>
         <p>{makeActualDate(publishedAt) || "Time"}</p>
       </div>
 
-      <p>{description || "Description of NEWS not provided"}</p>
-      <p className="source_name">By -: {sourceName || "Source Name"}</p>
+      <p>{description || "Description of this NEWS is not provided by Api."}</p>
+      <p className="source_name">Publisher -:{sourceName || "Source Name"}</p>
     </div>
   );
 }

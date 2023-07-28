@@ -129,10 +129,19 @@ function Content() {
         <h2>Search</h2>
       </div>
 
-      <div style={{  backgroundColor: "darkblue" , height : filterOnTop ? "100%" : "60vh" , marginTop: filterOnTop ? "0" : "5vh" }}
-        className={
+
+      <div 
+        style={{  
+          backgroundColor: "darkblue" , 
+          height : filterOnTop ? "100%" : "60vh" , 
+          marginTop: filterOnTop ? "0" : "5vh" 
+        }}
+
+        id="filter_div_mb_style"
+
+        className={ 
           filterOnTop
-            ? "col-12  px-4   "
+            ? "col-12 px-4  "
             : "col-sm-2 ps-4 border rounded"
         }
       >
@@ -199,7 +208,7 @@ function Content() {
 
           </div>
         ) : (
-          // By this way i'can show err or skeleton
+          // By this way i'can show err or skeleton (Skeleton code here -------->)
           <div className="skeleton">
             {!dataStatus ? (
               <section>

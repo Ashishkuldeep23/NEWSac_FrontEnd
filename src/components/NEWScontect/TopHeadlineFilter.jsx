@@ -60,8 +60,16 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
   return (
     <div className="my-3">
       <h3 className="d-sm-inline me-2  text-center">Filter Articles</h3>
-      <button className="d-none d-sm-inline btn btn-outline-danger px-1 py-0 " onClick={() => { setFilterOnTop(!filterOnTop) }}>
-        {filterOnTop ? <i className="fa-solid fa-hand-point-left"></i> : <i className="fa-solid fa-hand-point-up"></i>}
+      <button 
+        className="d-none d-sm-inline btn btn-outline-danger px-1 py-0 " 
+        onClick={() => { setFilterOnTop(!filterOnTop) }}
+      >
+        {
+          filterOnTop 
+          ? <i className="fa-solid fa-hand-point-left"></i> 
+          : <i className="fa-solid fa-hand-point-up"></i>
+        }
+
       </button>
 
 
@@ -103,9 +111,10 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
 
 
             </div>
+            
             :
-            <div className="all_selects">
 
+            <div className="">
               {
                 Array.from(Array(3), (el, i) => {
                   return (
