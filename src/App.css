@@ -3,7 +3,6 @@
     box-sizing: border-box;
 }
 
-
 html{
-    width: 98.5vw;
+    overflow-x: hidden;
 }
