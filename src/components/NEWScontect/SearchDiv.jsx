@@ -12,21 +12,41 @@ function SearchDiv() {
 
 
 
+    async function getDataBySearch(){
+        alert("Searching Data")
+    }
+
+
+
     return (
         <div className='d-flex justify-content-center h-100' >
 
             <div
-                className='border border-3 border-warning bg-dark rounded my-1'
+                className='border border-3 border-warning rounded my-1 mb-4'
                 onMouseOver={() => setInputBoxFocsed(true)}
                 onMouseOut={() => setInputBoxFocsed(false)}
-                id='search_holder_div'
             >
 
-                <input className='rounded ' type="text" name="" id="" />
-                <button className='rounded ' onClick={()=>setInputBoxFocsed(false)}>Search</button>
+                <input 
+                    className='rounded-start px-2 fw-bold' 
+                    type="text" 
+                    name="" 
+                    id="search_input_box"
+                    placeholder='ISRO'
+                    onKeyDown={(e)=>{ console.log(e.target) }}
+                 />
+                <button 
+                    className='rounded-end bg-success text-white fw-bold px-2' 
+                    onClick={()=>{setInputBoxFocsed(false); getDataBySearch() }}
+                >
+                    Search
+                </button>
 
-                <div className={inputBoxFocsed ? "d-block mx-2" : "d-none mx-2"}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                <div 
+                    className={inputBoxFocsed ? "d-block" : "d-none "} 
+                    style={ {position : "absolute" , color : "black"} }
+                >
+                    *Search news here by Keyword, like:- ISRO.
                 </div>
 
             </div>

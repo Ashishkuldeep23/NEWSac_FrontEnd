@@ -36,7 +36,7 @@ function Content() {
 
 
 
-  const headerDiv = useRef("")    // // // Refrence of header for scroll
+  const dataDivRef = useRef("")    // // // Refrence of header for scroll
 
 
 
@@ -103,8 +103,10 @@ function Content() {
         setTotalPagesAre(roundValue);
       }
 
-      // // // Scroll page to header when getData is called.
-      window.scrollTo(0, headerDiv.height)
+
+
+      // // // Scroll page to Data Div when getData is called.
+      window.scrollTo(0, dataDivRef.height)
 
 
 
@@ -116,6 +118,7 @@ function Content() {
       return setDataStatus(`Data not Found , Error is :- ${err.message}`);
     }
   }
+
 
 
   useEffect(() => {
@@ -139,7 +142,7 @@ function Content() {
 
     <>
       <div className="row">
-        <div ref={headerDiv} id="main_header_div" className="col-12 bg-warning">
+        <div id="main_header_div" className="col-12 bg-warning">
           <HearderDiv />
         </div>
 
@@ -171,6 +174,7 @@ function Content() {
         <div
           className={filterOnTop ? "col-sm-12" : "col-sm-10"}
           id="main_container"
+          ref={dataDivRef}
         >
           {contentArr.length > 0 ? (
             <div>
@@ -266,10 +270,6 @@ function Content() {
                 <h1>{dataStatus}</h1>
               )}
             </div>
-
-
-
-
           )}
         </div>
       </div >

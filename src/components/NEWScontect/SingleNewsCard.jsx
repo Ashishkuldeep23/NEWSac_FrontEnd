@@ -3,7 +3,7 @@ import React from "react";
 import "./style.css";
 
 function SingleCardOfNews({
-  filterOnTop ,
+  filterOnTop,
   urlToImage,
   title,
   author,
@@ -41,7 +41,7 @@ function SingleCardOfNews({
   }
 
   return (
-    <div style={ { width : filterOnTop ? "60vh" : "45vh"} }
+    <div style={{ width: filterOnTop ? "60vh" : "45vh" }}
       className="singe_card"
       onClick={() => {
         window.open(url);
@@ -54,15 +54,19 @@ function SingleCardOfNews({
         }
         alt={sourceName || "Source Name"}
       />
-      <h4 className="title">{title || "Title of NEWS"}</h4>
 
-      <div className="side_by_side">
-        <p className="author_of_article">By -:{author || "Writer"}</p>
-        <p>{makeActualDate(publishedAt) || "Time"}</p>
+      <div className="px-2">
+
+        <h4 className="title mt-1 text-dark">{title || "Title of NEWS"}</h4>
+
+        <div className="side_by_side">
+          <p className="author_of_article ">By-: {author || "Writer"}</p>
+          <p >{makeActualDate(publishedAt) || "Time"}</p>
+        </div>
+
+        <p>{description || "Description of this NEWS is not provided by Api."}</p>
+        <p className="source_name">Publisher-: {sourceName || "Source Name"}</p>
       </div>
-
-      <p>{description || "Description of this NEWS is not provided by Api."}</p>
-      <p className="source_name">Publisher -:{sourceName || "Source Name"}</p>
     </div>
   );
 }
