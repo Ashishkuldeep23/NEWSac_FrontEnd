@@ -4,7 +4,7 @@ import "./style.css"
 
 import SearchDiv from './SearchDiv'
 
-function HearderDiv() {
+function HearderDiv({setDataStatus , setContentArr , setTotalPagesAre ,dataDivRef , setIsSearchBoxOpen}) {
 
     const [infoDivShow , setInfoDivShow] = useState(false)
 
@@ -43,7 +43,13 @@ function HearderDiv() {
                 </div>
 
                 <div className="text-center">
-                    <SearchDiv />
+                    <SearchDiv 
+                        setDataStatus={setDataStatus} 
+                        setContentArr={setContentArr} 
+                        setTotalPagesAre={setTotalPagesAre}
+                        dataDivRef={dataDivRef}
+                        setIsSearchBoxOpen={setIsSearchBoxOpen}
+                     />
                 </div>
 
             </div>

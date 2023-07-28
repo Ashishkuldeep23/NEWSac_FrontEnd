@@ -143,14 +143,21 @@ function Content() {
     <>
       <div className="row">
         <div id="main_header_div" className="col-12 bg-warning">
-          <HearderDiv />
+          <HearderDiv  
+            setDataStatus={setDataStatus} 
+            setContentArr={setContentArr} 
+            setTotalPagesAre={setTotalPagesAre} 
+            dataDivRef={dataDivRef}
+            setIsSearchBoxOpen={setIsSearchBoxOpen}
+          />
         </div>
 
         <div
           style={{
             backgroundColor: "darkblue",
             height: filterOnTop ? "100%" : "60vh",
-            marginTop: filterOnTop ? "0" : "5vh"
+            marginTop: filterOnTop ? "0" : "5vh" ,
+            display : isSearchBoxOpen && "none" 
           }}
 
           id="filter_div_mb_style"
@@ -194,7 +201,7 @@ function Content() {
                 );
               })}
 
-              <div className="pages_of_this col-12 d-flex justify-content-center">
+              <div className="pages_of_this col-12 d-flex justify-content-center flex-wrap">
                 {/* <p className="btn btn-outline-primary mx-2">Previous {"   "}</p>
               <p className="btn btn-outline-primary  mx-2">Next</p> */}
 
@@ -227,48 +234,54 @@ function Content() {
           ) : (
             // By this way i'can show err or skeleton (Skeleton code here -------->)
             <div className="skeleton">
-              {!dataStatus ? (
-                <section>
-                  {Array.from(Array(20), (el, i) => {
-                    return (
-                      <div
-                        key={i}
-                        style={{ width: filterOnTop ? "60vh" : "45vh" }}
-                        className="singe_card skeleton_single"
-                      >
-                        <div className="spinner-border fs-1" style={{ height: "20vh", width: "20vh" }} role="status">
-                          <span className="visually-hidden">Loading...</span>
-                        </div>
-                        <h3 className="text-dark">Loading...</h3>
+              {
+                (!dataStatus)
+                  ? (
+                    <section>
+                      {Array.from(Array(20), (el, i) => {
+                        return (
+                          <div
+                            key={i}
+                            style={{ width: filterOnTop ? "60vh" : "45vh" }}
+                            className="singe_card skeleton_single"
+                          >
+                            <div className="spinner-border fs-1" style={{ height: "20vh", width: "20vh" }} role="status">
+                              <span className="visually-hidden">Loading...</span>
+                            </div>
+                            <h3 className="text-dark">Loading...</h3>
+                          </div>
+                        );
+                      })}
+
+
+                      <div className="pages_of_this col-12 d-flex justify-content-center">
+                        {/* dummy pagination here */}
+                        {
+                          Array.from(Array(5), (el, i) => {
+                            return <p key={i} className="btn btn-outline-primary  mx-2">{0}</p>
+                          })
+
+                        }
                       </div>
-                    );
-                  })}
-
-
-                  <div className="pages_of_this col-12 d-flex justify-content-center">
-                    {/* dummy pagination here */}
-                    {
-                      Array.from(Array(5), (el, i) => {
-                        return <p key={i} className="btn btn-outline-primary  mx-2">{0}</p>
-                      })
-
-                    }
-                  </div>
 
 
 
-                  {/*   Above is perfect by DRY run principle.
-              <div className="singe_card"></div>{" "}
-              <div className="singe_card"></div>{" "}
-              <div className="singe_card"></div>{" "}
-              <div className="singe_card"></div>{" "}
-              <div className="singe_card"></div>{" "}
-              <div className="singe_card"></div>{" "}
-              <div className="singe_card"></div>{" "} */}
-                </section>
-              ) : (
-                <h1>{dataStatus}</h1>
-              )}
+                      {/*   Above is perfect by DRY run principle.
+                          <div className="singe_card"></div>{" "}
+                          <div className="singe_card"></div>{" "}
+                          <div className="singe_card"></div>{" "}
+                          <div className="singe_card"></div>{" "}
+                          <div className="singe_card"></div>{" "}
+                          <div className="singe_card"></div>{" "}
+                          <div className="singe_card"></div>{" "} */}
+                    </section>
+                  )
+                  :
+                  (
+                    <h1>{dataStatus}</h1>
+                  )
+
+              }
             </div>
           )}
         </div>
