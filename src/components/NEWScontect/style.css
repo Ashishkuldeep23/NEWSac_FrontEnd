@@ -14,8 +14,8 @@
 
 #info_div{
   position: absolute;
-  background-image: linear-gradient(120deg , lightpink , white , lightcyan , white ,lightpink );
-  width: 70%;
+  /* background-image: linear-gradient(120deg , lightpink , white , lightcyan , white ,lightpink ); */
+  width: 94%;
   text-align: center;
   z-index: 50;
   padding: 2vh 0;
@@ -24,10 +24,32 @@
   border-bottom-right-radius: 2vh;
 }
 
+#info_div  #img{
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  height: 10vh;
+  width: 10vh;
+  object-fit: cover;
+  border: 2px solid #6edff6;
+  padding: 0.2vh;
+  border-radius: 50%;
+  transition:700ms;
+  cursor: pointer;
+  z-index: -10;
+}
+
+#info_div a #img:hover  {
+  transform: translate(40%, 40%) scale(1.5) rotate(360deg);
+  padding: 0.5vh;
+  border: 4px solid #6edff6;
+  z-index: 100;
+}
+
 #info_div > button{
   position: absolute;
   right: 5px;
-  top: 2px;
+  top: 5px;
   padding: 0.5vh;
 }
 
@@ -154,7 +176,8 @@
 .all_selects > label{
   border-top: 1px solid #adb5bd;
   /* border-bottom-color: black; */
-  border-radius: 2vh;
+  border-top-left-radius: 2vh;
+  border-top-right-radius: 2vh;
   margin-top: 1vh;
   padding: 0 1vh;
   width: 98%;
@@ -226,11 +249,11 @@
 
 
   #main_header_div{
-    top:-18.5vh;
+    top: -17%;
   }
 
   #search_input_box{
-    width: 50%;
+    width: 60%;
   }
 
   .all_selects {

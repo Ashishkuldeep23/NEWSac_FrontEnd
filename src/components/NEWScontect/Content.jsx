@@ -152,12 +152,13 @@ function Content() {
       <div className="row">
         <div id="main_header_div" className="col-12 bg-warning">
           <HearderDiv
+            getData={getData}
             contentArr={contentArr}
             setDataStatus={setDataStatus}
             setContentArr={setContentArr}
+            setFilterOnTop={setFilterOnTop}
             setTotalPagesAre={setTotalPagesAre}
             dataDivRef={dataDivRef}
-            setFilterOnTop={setFilterOnTop}
             setIsSearchBoxOpen={setIsSearchBoxOpen}
             someDataForQuery={someDataForQuery}
             searchByQueryBtn={searchByQueryBtn}
@@ -167,7 +168,6 @@ function Content() {
 
         <div
           style={{
-            backgroundColor: "darkblue",
             height: filterOnTop ? "100%" : "60vh",
             marginTop: filterOnTop ? "0" : "5vh",
             display: isSearchBoxOpen && "none"
@@ -177,8 +177,8 @@ function Content() {
 
           className={
             filterOnTop
-              ? "col-12 px-4  "
-              : "col-sm-2 ps-4 border rounded"
+              ? "col-12 px-4 bg-primary "
+              : "col-sm-2 ps-4 bg-primary  rounded"
           }
         >
           {" "}
@@ -259,7 +259,7 @@ function Content() {
 
                     (contentArr.length > 0) 
                     ? setSearchByQueryBtn(true)
-                    : alert("Please wait for while , Data is coming ")
+                    : alert("Data not present with your Query, Click on Logo to see home page. ")
                      
 
                     // console.log(someDataForQuery);  // // Calling Query function

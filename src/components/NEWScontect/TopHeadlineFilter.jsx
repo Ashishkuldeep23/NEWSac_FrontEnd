@@ -5,7 +5,49 @@ import "./style.css"
 import { useRef, useState, useEffect } from "react"
 
 
-function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filterOnTop, setFilterOnTop }) {
+
+// // // Below both array will used as Value in options.
+
+const arrOfOptionsCategory = ["entertainment", "business", "general", "health", "science", "sports", "technology"]
+
+const arrOfOptionContery = [
+  { sort: "in", name: "India" },
+  { sort: "us", name: "USA" },
+  { sort: "au", name: "Australia" },
+  { sort: "nz", name: "New Zealand" },
+  { sort: "ru", name: "Russia" },
+  { sort: "sa", name: "South Africa" },
+  { sort: "ae", name: "" },
+  { sort: "ar", name: "" },
+  { sort: "at", name: "" },
+  { sort: "be", name: "" },
+  { sort: "bg", name: "" },
+  { sort: "br", name: "" },
+  { sort: "ch", name: "" },
+  { sort: "cn", name: "" },
+  { sort: "eg", name: "" },
+  { sort: "gb", name: "" },
+  { sort: "hk", name: "" },
+  { sort: "jp", name: "" },
+  { sort: "lv", name: "" },
+  { sort: "mx", name: "" },
+  { sort: "ng", name: "" },
+  { sort: "no", name: "" },
+  { sort: "ph", name: "" },
+  { sort: "pt", name: "" },
+  { sort: "se", name: "" },
+  { sort: "si", name: "" },
+  { sort: "sk", name: "" },
+  { sort: "th", name: "" },
+  { sort: "tw", name: "" },
+  { sort: "ua", name: "" },
+  { sort: "ve", name: "" },
+  { sort: "za", name: "" },
+]
+
+
+
+function TopHeadlineFilter({ contentArr, getData, getAllQueriesOfFilter, filterOnTop, setFilterOnTop }) {
 
   const categoryRef = useRef("")
   const countryRef = useRef("")
@@ -27,14 +69,14 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
     setArticalCategory(articalCategory)
     setArticalCountry(articalCountry)
 
-    console.log(articalCategory)
-    console.log(articalCountry)
+    // console.log(articalCategory)
+    // console.log(articalCountry)
 
   }, [])
 
 
 
-  
+
   // // // This is filter handler function -------->
   function filterHandler(e) {
 
@@ -44,11 +86,11 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
 
 
     // // // Sending Query to actual get data Api
-    getAllQueriesOfFilter({articalCategory : articalCategory , articalCountry : articalCountry })
+    getAllQueriesOfFilter({ articalCategory: articalCategory, articalCountry: articalCountry })
 
 
     // // // calling getData function that gets data from backend and sets into main contant Arr.
-    getData(1, articalCategory,  "" , articalCountry, 20 )
+    getData(1, articalCategory, "", articalCountry, 20)
 
 
 
@@ -60,14 +102,14 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
   return (
     <div className="my-3">
       <h3 className="d-sm-inline me-2  text-center">Filter Articles</h3>
-      <button 
-        className="d-none d-sm-inline btn btn-outline-danger px-1 py-0 " 
+      <button
+        className="d-none d-sm-inline btn btn-danger btn-lg px-1 py-0"
         onClick={() => { setFilterOnTop(!filterOnTop) }}
       >
         {
-          filterOnTop 
-          ? <i className="fa-solid fa-hand-point-left"></i> 
-          : <i className="fa-solid fa-hand-point-up"></i>
+          filterOnTop
+            ? <i className="fa-solid fa-hand-point-left"></i>
+            : <i className="fa-solid fa-hand-point-up"></i>
         }
 
       </button>
@@ -81,15 +123,17 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
             ?
             <div className="all_selects">
 
-              <label htmlFor="category" >Category</label>
-              <select ref={categoryRef} value={articalCategory} onChange={(e) => { setArticalCategory(e.target.value) }} name="" id="category" >
-                <option value="entertainment">entertainment</option>
-                <option value="business">business</option>
-                <option value="general" >general</option>
-                <option value="health" >health</option>
-                <option value="science" >science</option>
-                <option value="sports" >sports</option>
-                <option value="technology" >technology</option>
+              <label className="fw-bold text-white bg-dark" htmlFor="category" >Category</label>
+              <select className="bg-warning" ref={categoryRef} value={articalCategory} onChange={(e) => { setArticalCategory(e.target.value) }} name="" id="category" >
+
+                {
+                  arrOfOptionsCategory.map(
+                    (el, i) => { return <option key={i} value={el}>{el}</option> }
+                  )
+                }
+
+
+
 
               </select>
 
@@ -100,19 +144,20 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
                 <option value="publishedAt">publishedAt</option>
               </select> */}
 
-              <label htmlFor="country">Country</label>
-              <select ref={countryRef} value={articalCountry} onChange={(e) => { setArticalCountry(e.target.value) }} name="" id="country" >
-                <option value="in">IN : India</option>
-                <option value="us">US : USA</option>
-                <option value="au" >AU : Australia</option>
-                <option value="nz" >NZ : New Zealand</option>
-                <option value="ru" >RU : Russia</option>
-                <option value="sa" >SA : South Africa</option>
+              <label className="fw-bold text-white bg-dark" htmlFor="country">Country</label>
+              <select className="bg-warning" ref={countryRef} value={articalCountry} onChange={(e) => { setArticalCountry(e.target.value) }} name="" id="country" >
+
+                {
+                  arrOfOptionContery.map(
+                    (ele, i) => { return <option key={i} value={ele.sort}>{ele.sort.toLocaleUpperCase()} : {ele.name || ele.sort}</option> }
+                  )
+                }
+
               </select>
 
 
             </div>
-            
+
             :
 
             <div className="">
@@ -120,8 +165,8 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
                 Array.from(Array(2), (el, i) => {
                   return (
                     < div key={i} className="all_selects">
-                      <label key={i} htmlFor="">Loading...</label>
-                      <select  name="" id="" >
+                      <label key={i} className="fw-bold text-white bg-dark" htmlFor="">Loading...</label>
+                      <select className="bg-warning" name="" id="" >
                         <option value="A">***</option>
                         <option value="B">**</option>
                         <option value="C" >*</option>
@@ -137,10 +182,10 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
 
 
 
-        <button 
-          className="px-2 m-1 ms-sm-auto btn btn-outline-success text-white fw-bold" 
-          onClick={(e) => (contentArr.length > 0) ? filterHandler(e) : alert("Please wait for while , Data is coming ") 
-        }>
+        <button
+          className="px-2 m-1 ms-sm-auto btn btn-outline-success text-white fw-bold"
+          onClick={(e) => (contentArr.length > 0) ? filterHandler(e) : alert("Please wait for while , Data is coming ")
+          }>
           <i className="fa-solid fa-filter fa-flip"></i> Filter
         </button>
 

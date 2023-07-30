@@ -9,7 +9,7 @@ import axios from 'axios'
 
 function SearchDiv({ contentArr, setDataStatus, setContentArr, setTotalPagesAre, dataDivRef , setFilterOnTop, setIsSearchBoxOpen, someDataForQuery, searchByQueryBtn, setSearchByQueryBtn }) {
 
-    const [inputBoxFocsed, setInputBoxFocsed] = useState(false)
+    const [inputBoxFocsed, setInputBoxFocsed] = useState(false)   // // Show Alert
 
     const [searchText, setSearchText] = useState("ISRO")
 
@@ -158,11 +158,11 @@ function SearchDiv({ contentArr, setDataStatus, setContentArr, setTotalPagesAre,
 
                 <input
                     className='rounded-start px-2 fw-bold'
+                    id="search_input_box"
                     value={searchText}
                     onChange={(e) => { setSearchText(e.target.value) }}
                     type="text"
                     name="text"
-                    id="search_input_box"
                     placeholder='ISRO'
                     onKeyDown={(e) => { if (e.key === "Enter") { getDataBySearch()  } }}
                     disabled={inputBoxDisable}
