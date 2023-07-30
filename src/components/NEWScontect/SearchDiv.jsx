@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useState } from 'react'
 
 import "./style.css"
@@ -7,7 +7,7 @@ import axios from 'axios'
 
 
 
-function SearchDiv({ setDataStatus, setContentArr, setTotalPagesAre, dataDivRef, setIsSearchBoxOpen }) {
+function SearchDiv({ contentArr, setDataStatus, setContentArr, setTotalPagesAre, dataDivRef , setFilterOnTop, setIsSearchBoxOpen, someDataForQuery, searchByQueryBtn, setSearchByQueryBtn }) {
 
     const [inputBoxFocsed, setInputBoxFocsed] = useState(false)
 
@@ -64,7 +64,7 @@ function SearchDiv({ setDataStatus, setContentArr, setTotalPagesAre, dataDivRef,
 
             console.log(request);
 
-            if (!request.data.status) {
+            if (request.message) {
                 alert(request.data.message);
                 return setDataStatus(`Data not Found with this text :- ${searchText}`);
             }
@@ -81,8 +81,8 @@ function SearchDiv({ setDataStatus, setContentArr, setTotalPagesAre, dataDivRef,
             }
 
 
-            // // // Set result by search open or not---->
-            setIsSearchBoxOpen(true)
+            // // // Set filter div to true for UI Changes(Main Data in full space)
+            setFilterOnTop(true)
 
 
             // // // Scroll page to Data Div when getData is called.
@@ -95,14 +95,55 @@ function SearchDiv({ setDataStatus, setContentArr, setTotalPagesAre, dataDivRef,
             // // // Set result by search open or not---->
             setIsSearchBoxOpen(false)
             console.log(err);
-            setDataStatus(`Data not Found , Error is :- ${err.message}`);
+            setDataStatus(`Data not Found with this text :- ${searchText} , Please search for something else.`);
         }
 
+
+
+        // // // Set result by search open or not---->
+        setIsSearchBoxOpen(true)
 
         // // // Setting input box to false , if already true.
         return setInputBoxDisable(false)
 
     }
+
+
+
+    useEffect(() => {
+
+        // console.log(searchByQueryBtn)
+
+        // // // This code will run When Search filter called or Pagination btn clickecd
+        if (searchByQueryBtn) {
+
+            console.log(someDataForQuery)
+            console.log(Object.keys(someDataForQuery))
+            console.log(Object.keys(someDataForQuery).length)
+
+
+            // // // If object of value got changed rthen only run below line for that an if condition is present with || (conditional operator)
+
+            let { page, from, to, sortBy } = someDataForQuery
+
+            if (page !== 1 || from !== "" || to !== "" || sortBy !== "") {
+                getDataBySearch(page, searchText?.trim()?.toLowerCase(), sortBy, from, to)
+
+                console.log("Calling Axios not")
+            } else {
+                alert("Change something from Search filter.")
+            }
+
+
+            // // // If work is done make btn var to false
+            setSearchByQueryBtn(false)
+
+        }
+
+
+    }, [searchByQueryBtn])
+
+
 
 
 
@@ -123,14 +164,15 @@ function SearchDiv({ setDataStatus, setContentArr, setTotalPagesAre, dataDivRef,
                     name="text"
                     id="search_input_box"
                     placeholder='ISRO'
-                    onKeyDown={(e) => { if (e.key === "Enter") { getDataBySearch() } }}
+                    onKeyDown={(e) => { if (e.key === "Enter") { getDataBySearch()  } }}
                     disabled={inputBoxDisable}
                 />
                 <button
                     className='rounded-end bg-success text-white fw-bold px-2'
-                    onClick={() => { setInputBoxFocsed(false); getDataBySearch() }}
+                    // onClick={() => { (contentArr.length > 0) ? getDataBySearch() && setInputBoxFocsed(false) : alert("Please wait for while , Data is coming ") }}
+                    onClick={() => {  getDataBySearch();setInputBoxFocsed(false) }}
                 >
-                    Search
+                   <i className="fa-solid fa-magnifying-glass fa-flip"></i>
                 </button>
 
                 <div

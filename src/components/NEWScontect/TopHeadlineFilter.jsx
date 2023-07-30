@@ -8,13 +8,11 @@ import { useRef, useState, useEffect } from "react"
 function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filterOnTop, setFilterOnTop }) {
 
   const categoryRef = useRef("")
-  const sortByRef = useRef("")
   const countryRef = useRef("")
 
 
-  const [articalCategory, setArticalCategory] = useState("")
-  const [articalSortBy, setArticalSortBy] = useState("")
-  const [articalCountry, setArticalCountry] = useState("")
+  const [articalCategory, setArticalCategory] = useState("entertainment")
+  const [articalCountry, setArticalCountry] = useState("in")
 
 
 
@@ -26,9 +24,11 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
   // // // This hook is used to set value of reload
   useEffect(() => {
 
-    setArticalCategory(categoryRef.current.value)
-    setArticalSortBy(sortByRef.current.value)
-    setArticalCountry(countryRef.current.value)
+    setArticalCategory(articalCategory)
+    setArticalCountry(articalCountry)
+
+    console.log(articalCategory)
+    console.log(articalCountry)
 
   }, [])
 
@@ -44,11 +44,11 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
 
 
     // // // Sending Query to actual get data Api
-    getAllQueriesOfFilter({articalCategory : articalCategory , articalSortBy : articalSortBy, articalCountry : articalCountry })
+    getAllQueriesOfFilter({articalCategory : articalCategory , articalCountry : articalCountry })
 
 
     // // // calling getData function that gets data from backend and sets into main contant Arr.
-    getData(1, articalCategory, articalSortBy, articalCountry, 20 )
+    getData(1, articalCategory,  "" , articalCountry, 20 )
 
 
 
@@ -93,11 +93,12 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
 
               </select>
 
-              <label htmlFor="sort_by">Sorty by</label>
-              <select ref={sortByRef} value={articalSortBy} onChange={(e) => { setArticalSortBy(e.target.value) }} name="" id="sort_by" >
+              {/* SortBy no use now -----> */}
+              {/* <label htmlFor="sort_by">Sorty by</label>
+              <select value={articalSortBy} onChange={(e) => { setArticalSortBy(e.target.value) }} name="" id="sort_by" >
                 <option value="popularity">popularity</option>
                 <option value="publishedAt">publishedAt</option>
-              </select>
+              </select> */}
 
               <label htmlFor="country">Country</label>
               <select ref={countryRef} value={articalCountry} onChange={(e) => { setArticalCountry(e.target.value) }} name="" id="country" >
@@ -116,7 +117,7 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
 
             <div className="">
               {
-                Array.from(Array(3), (el, i) => {
+                Array.from(Array(2), (el, i) => {
                   return (
                     < div key={i} className="all_selects">
                       <label key={i} htmlFor="">Loading...</label>
@@ -136,7 +137,12 @@ function TopHeadlineFilter({ contentArr, getData  , getAllQueriesOfFilter , filt
 
 
 
-        <button className="px-2 m-1 ms-sm-auto btn btn-outline-success text-white fw-bold" onClick={(e) => (contentArr.length > 0) ? filterHandler(e) : alert("Data is coming , please wait") }>{ (contentArr.length > 0) ? "Filter" : "Coming" }</button>
+        <button 
+          className="px-2 m-1 ms-sm-auto btn btn-outline-success text-white fw-bold" 
+          onClick={(e) => (contentArr.length > 0) ? filterHandler(e) : alert("Please wait for while , Data is coming ") 
+        }>
+          <i className="fa-solid fa-filter fa-flip"></i> Filter
+        </button>
 
 
 

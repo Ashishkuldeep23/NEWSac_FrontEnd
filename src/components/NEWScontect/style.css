@@ -116,12 +116,13 @@
 }
 
 .singe_card:hover .title {
-  color: red;
+  color: red  !important;
   cursor: pointer;
   text-decoration: underline;
 }
 
 .singe_card > img {
+  margin-top: 0.5vh;
   width: 100%;
   height: 35vh;
   object-fit: cover;

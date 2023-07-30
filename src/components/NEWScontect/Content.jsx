@@ -35,10 +35,16 @@ function Content() {
   const [allQueryObject, setAllQueryObject] = useState({})    // // // This var hold all filtered query.
 
 
+  const [someDataForQuery, setSomeDataForQuery] = useState({ page: 1, from: "", to: "", sortBy: "publishedAt" })
+
+
+  const [searchByQueryBtn , setSearchByQueryBtn] = useState(false)    // // // This var will make value true when btn clicked and if this var is true then search by query fn called
+
 
   const dataDivRef = useRef("")    // // // Refrence of header for scroll
 
 
+  // const querySearchDiv = useRef("")  // // // Refrence of Query serch for set value at useEffect
 
 
 
@@ -48,12 +54,10 @@ function Content() {
     // console.log(obj)
 
     if (Object.keys(obj) <= 0) {
-      obj = { articalCategory: "", articalSortBy: "publishedAt", articalCountry: "in" }
+      obj = { articalCategory: "", articalCountry: "in" }
     }
 
-
     setPresentVisiblePage(1)  // // // setting page Always 1st on filter
-
     setAllQueryObject(obj)  // // // Setting query object
 
     // console.log(allQueryObject)
@@ -97,17 +101,15 @@ function Content() {
       let totalGetRes = request.data.data.totalResults;
       let articlesInThisReq = request.data.data.articles.length
 
+
       if (totalGetRes > articlesInThisReq) {
         let roundValue = Math.ceil(totalGetRes / 20);
         // console.log(roundValue)
         setTotalPagesAre(roundValue);
       }
 
-
-
       // // // Scroll page to Data Div when getData is called.
       window.scrollTo(0, dataDivRef.height)
-
 
 
       // // // Set data in main arr 
@@ -118,6 +120,10 @@ function Content() {
       return setDataStatus(`Data not Found , Error is :- ${err.message}`);
     }
   }
+
+
+
+
 
 
 
@@ -138,17 +144,24 @@ function Content() {
 
   }, []);
 
+
+
   return (
 
     <>
       <div className="row">
         <div id="main_header_div" className="col-12 bg-warning">
-          <HearderDiv  
-            setDataStatus={setDataStatus} 
-            setContentArr={setContentArr} 
-            setTotalPagesAre={setTotalPagesAre} 
+          <HearderDiv
+            contentArr={contentArr}
+            setDataStatus={setDataStatus}
+            setContentArr={setContentArr}
+            setTotalPagesAre={setTotalPagesAre}
             dataDivRef={dataDivRef}
+            setFilterOnTop={setFilterOnTop}
             setIsSearchBoxOpen={setIsSearchBoxOpen}
+            someDataForQuery={someDataForQuery}
+            searchByQueryBtn={searchByQueryBtn}
+            setSearchByQueryBtn={setSearchByQueryBtn}
           />
         </div>
 
@@ -156,8 +169,8 @@ function Content() {
           style={{
             backgroundColor: "darkblue",
             height: filterOnTop ? "100%" : "60vh",
-            marginTop: filterOnTop ? "0" : "5vh" ,
-            display : isSearchBoxOpen && "none" 
+            marginTop: filterOnTop ? "0" : "5vh",
+            display: isSearchBoxOpen && "none"
           }}
 
           id="filter_div_mb_style"
@@ -179,10 +192,94 @@ function Content() {
           />
         </div>
         <div
-          className={filterOnTop ? "col-sm-12" : "col-sm-10"}
+          className={( searchByQueryBtn || filterOnTop) ? "col-sm-12" : "col-sm-10"}
           id="main_container"
           ref={dataDivRef}
         >
+
+          {/* Search filter ------------> */}
+
+          <div className="col-12 mt-1" >
+
+            {
+              (isSearchBoxOpen) &&
+              <div className="bg-primary py-1 px-4 rounded d-flex justify-content-center flex-wrap text-white fw-bold" >
+                <div>
+
+                  <label htmlFor="sortBy">Sort By:-</label>
+                  <select
+                    className="mx-2 rounded p-1 bg-warning"
+                    value={someDataForQuery.sortBy}
+                    id="sortBy"
+                    name="sortBy"
+                    onChange={(e) => { setSomeDataForQuery({ ...someDataForQuery, [e.target.name]: e.target.value }) }}
+                  >
+                    <option value="popularity">Popularity</option>
+                    <option value="relevancy">Relevancy</option>
+                    <option value="publishedAt">PublishedAt</option>
+                  </select>
+
+                </div>
+
+                <div>
+                  <label htmlFor="from">From:-</label>
+                  <input
+                    className="mx-2 rounded p-1 bg-warning"
+                    value={someDataForQuery.from}
+                    type="date"
+                    name="from"
+                    id="from"
+                    onChange={(e) => {
+                      setSomeDataForQuery({ ...someDataForQuery, [e.target.name]: e.target.value })
+                    }}
+                  />
+                </div>
+
+                <div>
+
+                  <label htmlFor="to">To:-</label>
+                  <input
+                    className="mx-2 rounded p-1 bg-warning"
+                    value={someDataForQuery.to}
+                    type="date"
+                    name="to"
+                    id="to"
+                    onChange={(e) => {
+                      setSomeDataForQuery({ ...someDataForQuery, [e.target.name]: e.target.value })
+                    }}
+                  />
+                </div>
+
+                <button
+                  name="btn"
+                  value={true}
+                  className="mx-2 ms-auto rounded p-1 bg-success text-white fw-bold border-dark"
+                  onClick={(e) => {
+
+
+                    (contentArr.length > 0) 
+                    ? setSearchByQueryBtn(true)
+                    : alert("Please wait for while , Data is coming ")
+                     
+
+                    // console.log(someDataForQuery);  // // Calling Query function
+                  }}
+
+                >
+                  {
+                    (contentArr.length > 0) ? "Query Search" : "Coming"
+                  }
+                </button>
+
+              </div>
+
+            }
+
+          </div>
+
+
+
+
           {contentArr.length > 0 ? (
             <div>
               {contentArr.map((el, i) => {
@@ -199,11 +296,12 @@ function Content() {
                     sourceName={el.source.name}
                   />
                 );
-              })}
+              })
+              }
 
               <div className="pages_of_this col-12 d-flex justify-content-center flex-wrap">
-                {/* <p className="btn btn-outline-primary mx-2">Previous {"   "}</p>
-              <p className="btn btn-outline-primary  mx-2">Next</p> */}
+
+                {/* Actual pagition */}
 
                 {
                   Array.from(Array(totalPagesAre), (el, i) => {
@@ -212,10 +310,15 @@ function Content() {
                         key={i} id={i + 1}
                         className={(presentVisiblePage === i + 1) ? "btn btn-primary mx-2" : "btn btn-outline-primary mx-2"}
                         onClick={(e) => {
+
                           // console.log(presentVisiblePage);     // // //
                           setPresentVisiblePage(i + 1);
                           // console.log(e.target.id);    // // // Setting id = i+1 that's why taking id insted of innerHtml
-                          return getData(e.target.id, allQueryObject.articalCategory, allQueryObject.articalSortBy, allQueryObject.articalCountry, 20)
+                          (!isSearchBoxOpen)
+                            ? getData(e.target.id, allQueryObject.articalCategory , "" , allQueryObject.articalCountry, 20)
+                            :  setSearchByQueryBtn(true);  setSomeDataForQuery({ ...someDataForQuery, page: e.target.id }) // // // Set Query Data ------>
+                            // // Calling Query function
+                          return
                         }}
                       >
                         {
