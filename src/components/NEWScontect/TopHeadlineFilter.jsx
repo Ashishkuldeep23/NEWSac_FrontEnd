@@ -183,7 +183,7 @@ function TopHeadlineFilter({ contentArr, getData, getAllQueriesOfFilter, filterO
 
 
         <button
-          className="px-2 m-1 ms-sm-auto btn btn-outline-success text-white fw-bold"
+          className="px-2 m-1 ms-sm-auto btn btn-success text-white  fw-bold"
           onClick={(e) => (contentArr.length > 0) ? filterHandler(e) : alert("Please wait for while , Data is coming ")
           }>
           <i className="fa-solid fa-filter fa-flip"></i> Filter

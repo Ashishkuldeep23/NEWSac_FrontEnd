@@ -20,7 +20,7 @@ function SearchDiv({ contentArr, setDataStatus, setContentArr, setTotalPagesAre,
 
 
 
-    async function getDataBySearch(page = 1, q = "ISRO", sortBy = "publishedAt", from = "", to = "", pageSize = 20) {
+    async function getDataBySearch(page = 1, q = "ISRO", sortBy = "publishedAt", from = "", to = "", pageSize = 100) {
 
 
         // // // If input box is true then return with alert.
@@ -127,7 +127,7 @@ function SearchDiv({ contentArr, setDataStatus, setContentArr, setTotalPagesAre,
             let { page, from, to, sortBy } = someDataForQuery
 
             if (page !== 1 || from !== "" || to !== "" || sortBy !== "") {
-                getDataBySearch(page, searchText?.trim()?.toLowerCase(), sortBy, from, to)
+                getDataBySearch(page, searchText?.trim()?.toLowerCase(), sortBy, from, to , 100)
 
                 console.log("Calling Axios not")
             } else {

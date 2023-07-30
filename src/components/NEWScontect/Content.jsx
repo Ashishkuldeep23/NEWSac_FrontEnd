@@ -38,7 +38,7 @@ function Content() {
   const [someDataForQuery, setSomeDataForQuery] = useState({ page: 1, from: "", to: "", sortBy: "publishedAt" })
 
 
-  const [searchByQueryBtn , setSearchByQueryBtn] = useState(false)    // // // This var will make value true when btn clicked and if this var is true then search by query fn called
+  const [searchByQueryBtn, setSearchByQueryBtn] = useState(false)    // // // This var will make value true when btn clicked and if this var is true then search by query fn called
 
 
   const dataDivRef = useRef("")    // // // Refrence of header for scroll
@@ -123,6 +123,25 @@ function Content() {
 
 
 
+  function giveTodaysDate(){
+
+    let newDate = new Date
+
+    let date = newDate.getDate();
+    let month = newDate.getMonth();
+    let year = newDate.getFullYear();
+
+    // console.log(date,month, year)
+
+    // // // Putting 0 before month if less then 10
+
+    date = date < 10 ? `0${date}` : date;
+    month = month < 10 ? `0${month}` : month;
+
+    return `${date}-${month}-${year}`;
+  }
+
+
 
 
 
@@ -177,8 +196,8 @@ function Content() {
 
           className={
             filterOnTop
-              ? "col-12 px-4 bg-primary "
-              : "col-sm-2 ps-4 bg-primary  rounded"
+              ? "col-12 px-4 mt-2 bg-primary "
+              : "col-sm-2 ps-4 mt-2 bg-primary  rounded"
           }
         >
           {" "}
@@ -192,10 +211,13 @@ function Content() {
           />
         </div>
         <div
-          className={( searchByQueryBtn || filterOnTop) ? "col-sm-12" : "col-sm-10"}
+          className={(searchByQueryBtn || filterOnTop) ? "col-sm-12" : "col-sm-10"}
           id="main_container"
           ref={dataDivRef}
         >
+          {/* A Heading  */}
+          {(!isSearchBoxOpen) && <h3 className="text-center text-info text-decoration-underline">Today's Top News -: [{giveTodaysDate()}] </h3>}
+
 
           {/* Search filter ------------> */}
 
@@ -257,10 +279,10 @@ function Content() {
                   onClick={(e) => {
 
 
-                    (contentArr.length > 0) 
-                    ? setSearchByQueryBtn(true)
-                    : alert("Data not present with your Query, Click on Logo to see home page. ")
-                     
+                    (contentArr.length > 0)
+                      ? setSearchByQueryBtn(true)
+                      : alert("Data not present with your Query, Click on Logo to see home page. ")
+
 
                     // console.log(someDataForQuery);  // // Calling Query function
                   }}
@@ -304,31 +326,38 @@ function Content() {
                 {/* Actual pagition */}
 
                 {
-                  Array.from(Array(totalPagesAre), (el, i) => {
-                    return (
-                      <p
-                        key={i} id={i + 1}
-                        className={(presentVisiblePage === i + 1) ? "btn btn-primary mx-2" : "btn btn-outline-primary mx-2"}
-                        onClick={(e) => {
 
-                          // console.log(presentVisiblePage);     // // //
-                          setPresentVisiblePage(i + 1);
-                          // console.log(e.target.id);    // // // Setting id = i+1 that's why taking id insted of innerHtml
-                          (!isSearchBoxOpen)
-                            ? getData(e.target.id, allQueryObject.articalCategory , "" , allQueryObject.articalCountry, 20)
-                            :  setSearchByQueryBtn(true);  setSomeDataForQuery({ ...someDataForQuery, page: e.target.id }) // // // Set Query Data ------>
+                  (isSearchBoxOpen)
+                    // // // Only One page show when data by query search
+                    ? <p className="btn btn-primary mx-2" onClick={() => { setSearchByQueryBtn(true); setSomeDataForQuery({ ...someDataForQuery, page: 1 }) }}>Only</p>
+
+                    // // // All pages show if data not from query search
+                    : Array.from(Array(totalPagesAre), (el, i) => {
+                      return (
+
+                        <p
+                          key={i} id={i + 1}
+                          className={(presentVisiblePage === i + 1) ? "btn btn-primary mx-2" : "btn btn-outline-primary mx-2"}
+                          onClick={(e) => {
+
+                            // console.log(presentVisiblePage);     // // //
+                            setPresentVisiblePage(i + 1);
+                            // console.log(e.target.id);    // // // Setting id = i+1 that's why taking id insted of innerHtml
+                            (!isSearchBoxOpen)
+                              ? getData(e.target.id, allQueryObject.articalCategory, "", allQueryObject.articalCountry, 20)
+                              : setSearchByQueryBtn(true); setSomeDataForQuery({ ...someDataForQuery, page: e.target.id }) // // // Set Query Data ------>
                             // // Calling Query function
-                          return
-                        }}
-                      >
-                        {
-                          (i === 0) ? "First" : ((i + 1) === totalPagesAre ? "Last" : i + 1)
-                        }
-                      </p>
+                            return
+                          }}
+                        >
+                          {
+                            (i === 0) ? "First" : ((i + 1) === totalPagesAre ? "Last" : i + 1)
+                          }
+                        </p>
 
 
-                    )
-                  })
+                      )
+                    })
                 }
 
               </div>

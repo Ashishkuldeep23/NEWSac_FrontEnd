@@ -1,3 +1,25 @@
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ffc107;
+  border-radius: 50vh;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #87680d;
+}
+
+
 
 
 #main_container {
@@ -36,7 +58,7 @@
   border-radius: 50%;
   transition:700ms;
   cursor: pointer;
-  z-index: -10;
+  /* z-index: -10; */
 }
 
 #info_div a #img:hover  {
@@ -113,7 +135,7 @@
 
 
 .singe_card {
-  background-color: #f4ffff;
+  background-color: #dcf5fb;
 
   min-height: 60vh;
   margin: 1rem;
