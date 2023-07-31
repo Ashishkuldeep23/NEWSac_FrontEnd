@@ -37,13 +37,22 @@ function HearderDiv({ getData, contentArr, setDataStatus, setContentArr, setTota
                 <button className='cancel px-2 rounded' onClick={() => setInfoDivShow(false)}>X</button>
 
                 <ul className='text-white'>
-                    <li>This web app gives latest NEWS everytime.</li>
-                    <li>Here user can search NEWS by giving keyword in input box.(Just below of icon)</li>
-                    <li>In this web app you can filter data accroding to (category & nation) your intrest.(In Darkblue div)</li>
-                    <li>In last user can read multipages by sending request from pagnation.(In last of all NEWS)</li>
+                    <li>This web app gives <strong>latest NEWS</strong> everytime.</li>
+                    <li>Here user can <strong>search NEWS by giving keyword in input</strong> box.(Just below of icon)</li>
+                    <li>In this web app you can <strong>filter data accroding to (Category & Nation)</strong> your intrest.(In Darkblue div)</li>
+                    <li>In last user can read multipages by sending request from <strong>pagnation.</strong>(In last of all NEWS)</li>
+                    <li><strong>Click on Icon</strong> or Name for going on <strong>Home page</strong> (Without reloading window).</li>
                     <li>Data provided by Free Api.</li>
-                    <li>Link:- <a href="">Link</a>.</li>
-                    <li>Link:- <a href="">Link</a>.</li>
+                    <li>
+                        <a 
+                            href="https://github.com/Ashishkuldeep23/NEWSac_FrontEnd" className='text-decoration-none fw-bold'
+                        >GitHub</a>
+                    </li>
+                    <li>
+                        <a 
+                            href="https://newsac-latest-news-free.vercel.app/" className='text-decoration-none fw-bold'
+                        >Web App</a>
+                    </li>
                     <li>Created by ❤️ Ashish Kuldeep</li>
                 </ul>
 
@@ -52,7 +61,7 @@ function HearderDiv({ getData, contentArr, setDataStatus, setContentArr, setTota
 
 
             {/* Main Header code here ----------> */}
-            <div className='d-flex flex-column flex-sm-row align-items-center justify-content-between px-4 py-2' >
+            <div className='d-flex flex-column flex-sm-row align-items-center justify-content-between px-4 py-2'>
                 <div >
                     <div onClick={()=>{repairHomePage()}} className='d-flex justify-content-start align-items-center my-1' id='web_name_div' >
                         <img className='icon_header' src="./news2.png" alt="Web Icon" />

@@ -46,6 +46,10 @@
   border-bottom-right-radius: 2vh;
 }
 
+#info_div strong{
+  color: #ffc107;
+}
+
 #info_div  #img{
   position: absolute;
   left: 5px;
@@ -57,9 +61,16 @@
   padding: 0.2vh;
   border-radius: 50%;
   transition:700ms;
-  cursor: pointer;
-  /* z-index: -10; */
+  cursor: all-scroll;
+  z-index: 1;
 }
+
+
+#info_div:hover #img{
+  z-index: -10;
+}
+
+
 
 #info_div a #img:hover  {
   transform: translate(40%, 40%) scale(1.5) rotate(360deg);
