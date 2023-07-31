@@ -49,6 +49,8 @@ function Content() {
 
 
 
+
+
   // // // Get all Queries from filtered data by filter div ------>
   function getAllQueriesOfFilter(obj) {
     // console.log(obj)
@@ -77,8 +79,11 @@ function Content() {
     // console.log(page , country , category , sortBy ,pageSize)
 
     try {
+
+      let url = import.meta.env.VITE_HIDE_URL
+
       const request = await axios(
-        `https://free-apis-back-end.vercel.app/newsac/top-headlines?country=${country}&sortBy=${sortBy}&page=${page}&category=${category}&pageSize=${pageSize}`
+        `${url}/top-headlines?country=${country}&sortBy=${sortBy}&page=${page}&category=${category}&pageSize=${pageSize}`
       );
 
       console.log(request);
@@ -117,13 +122,13 @@ function Content() {
 
     } catch (err) {
       console.log(err);
-      return setDataStatus(`Data not Found , Error is :- ${err.message}`);
+      return setDataStatus(`Data not Found , Error is :- ${err.message} &&&&&&&&&&& ${err.response.data.axiosMessage || "Error"} `);
     }
   }
 
 
 
-  function giveTodaysDate(){
+  function giveTodaysDate() {
 
     let newDate = new Date
 
@@ -141,6 +146,11 @@ function Content() {
     return `${date}-${month}-${year}`;
   }
 
+
+  function getThisYear() {
+    let thisYear = new Date
+    return thisYear.getFullYear();
+  }
 
 
 
@@ -185,10 +195,14 @@ function Content() {
           />
         </div>
 
+
         <div
           style={{
             height: filterOnTop ? "100%" : "60vh",
             marginTop: filterOnTop ? "0" : "5vh",
+
+            position: filterOnTop ? "unset" : "sticky",
+            top: filterOnTop ? "unset" : "5vh",
             display: isSearchBoxOpen && "none"
           }}
 
@@ -196,19 +210,18 @@ function Content() {
 
           className={
             filterOnTop
-              ? "col-12 px-4 mt-2 bg-primary "
-              : "col-sm-2 ps-4 mt-2 bg-primary  rounded"
+              ? "col-12 px-4 mt-2 bg-primary rounded rounded-3"
+              : "col-sm-2 ps-4 mt-2 bg-primary  rounded rounded-3"
           }
         >
-          {" "}
           <TopHeadlineFilter
             contentArr={contentArr}
             getData={getData}
             getAllQueriesOfFilter={getAllQueriesOfFilter}
-
             filterOnTop={filterOnTop}
             setFilterOnTop={setFilterOnTop}
           />
+
         </div>
         <div
           className={(searchByQueryBtn || filterOnTop) ? "col-sm-12" : "col-sm-10"}
@@ -362,6 +375,10 @@ function Content() {
 
               </div>
 
+
+              {/* Copy Right ------> */}
+              <p className="text-center">Copyright © {getThisYear()} NEWSa2z.com®</p>
+
             </div>
           ) : (
             // By this way i'can show err or skeleton (Skeleton code here -------->)
@@ -377,7 +394,11 @@ function Content() {
                             style={{ width: filterOnTop ? "60vh" : "45vh" }}
                             className="singe_card skeleton_single"
                           >
-                            <div className="spinner-border fs-1" style={{ height: "20vh", width: "20vh" }} role="status">
+                            <div 
+                              className="spinner-border fs-1 "  
+                              role="status"
+                              style={ {height : "20vh" , width : '20vh'} }
+                            >
                               <span className="visually-hidden">Loading...</span>
                             </div>
                             <h3 className="text-dark">Loading...</h3>

@@ -7,7 +7,7 @@ import axios from 'axios'
 
 
 
-function SearchDiv({ contentArr, setDataStatus, setContentArr, setTotalPagesAre, dataDivRef , setFilterOnTop, setIsSearchBoxOpen, someDataForQuery, searchByQueryBtn, setSearchByQueryBtn }) {
+function SearchDiv({ contentArr, setDataStatus, setContentArr, setTotalPagesAre, dataDivRef, setFilterOnTop, setIsSearchBoxOpen, someDataForQuery, searchByQueryBtn, setSearchByQueryBtn }) {
 
     const [inputBoxFocsed, setInputBoxFocsed] = useState(false)   // // Show Alert
 
@@ -53,13 +53,13 @@ function SearchDiv({ contentArr, setDataStatus, setContentArr, setTotalPagesAre,
         setInputBoxDisable(true)
 
 
-        // let url = `https://newsapi.org/v2/everything?q=${q}&from=${from}&to=${to}&pageSize=${pageSize}&page=${page}&sortBy=${sortBy}&apiKey=${Api_key}`
-
-
         try {
 
+            let url = import.meta.env.VITE_HIDE_URL
+
+
             const request = await axios(
-                `https://free-apis-back-end.vercel.app/newsac/everything?q=${searchText?.trim()?.toLowerCase() || q}&from=${from}&to=${to}&pageSize=${pageSize}&page=${page}&sortBy=${sortBy}`
+                `${url}/everything?q=${searchText?.trim()?.toLowerCase() || q}&from=${from}&to=${to}&pageSize=${pageSize}&page=${page}&sortBy=${sortBy}`
             );
 
             console.log(request);
@@ -95,7 +95,7 @@ function SearchDiv({ contentArr, setDataStatus, setContentArr, setTotalPagesAre,
             // // // Set result by search open or not---->
             setIsSearchBoxOpen(false)
             console.log(err);
-            setDataStatus(`Data not Found with this text :- ${searchText} , Please search for something else.`);
+            setDataStatus(`Data not Found with this text :- ${searchText} , Please search for something else. &&&&&&&&&&& ${err.response.data.axiosMessage || "Error"} `);
         }
 
 
@@ -117,9 +117,9 @@ function SearchDiv({ contentArr, setDataStatus, setContentArr, setTotalPagesAre,
         // // // This code will run When Search filter called or Pagination btn clickecd
         if (searchByQueryBtn) {
 
-            console.log(someDataForQuery)
-            console.log(Object.keys(someDataForQuery))
-            console.log(Object.keys(someDataForQuery).length)
+            // console.log(someDataForQuery)
+            // console.log(Object.keys(someDataForQuery))
+            // console.log(Object.keys(someDataForQuery).length)
 
 
             // // // If object of value got changed rthen only run below line for that an if condition is present with || (conditional operator)
@@ -127,7 +127,7 @@ function SearchDiv({ contentArr, setDataStatus, setContentArr, setTotalPagesAre,
             let { page, from, to, sortBy } = someDataForQuery
 
             if (page !== 1 || from !== "" || to !== "" || sortBy !== "") {
-                getDataBySearch(page, searchText?.trim()?.toLowerCase(), sortBy, from, to , 100)
+                getDataBySearch(page, searchText?.trim()?.toLowerCase(), sortBy, from, to, 100)
 
                 console.log("Calling Axios not")
             } else {
@@ -164,20 +164,20 @@ function SearchDiv({ contentArr, setDataStatus, setContentArr, setTotalPagesAre,
                     type="text"
                     name="text"
                     placeholder='ISRO'
-                    onKeyDown={(e) => { if (e.key === "Enter") { getDataBySearch()  } }}
+                    onKeyDown={(e) => { if (e.key === "Enter") { getDataBySearch() } }}
                     disabled={inputBoxDisable}
                 />
                 <button
                     className='rounded-end bg-success text-white fw-bold px-2'
                     // onClick={() => { (contentArr.length > 0) ? getDataBySearch() && setInputBoxFocsed(false) : alert("Please wait for while , Data is coming ") }}
-                    onClick={() => {  getDataBySearch();setInputBoxFocsed(false) }}
+                    onClick={() => { getDataBySearch(); setInputBoxFocsed(false) }}
                 >
-                   <i className="fa-solid fa-magnifying-glass fa-flip"></i>
+                    <i className="fa-solid fa-magnifying-glass fa-flip"></i>
                 </button>
 
                 <div
                     className={inputBoxFocsed ? "d-block" : "d-none "}
-                    style={{ position: "absolute", color: "black" }}
+                    style={{ position: "absolute", color: "black", marginLeft: "-3vh" }}
                 >
                     *Search news here by Keyword, like:- ISRO.
                 </div>

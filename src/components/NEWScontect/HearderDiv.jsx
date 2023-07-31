@@ -32,8 +32,8 @@ function HearderDiv({ getData, contentArr, setDataStatus, setContentArr, setTota
                 <a href="https://res.cloudinary.com/dlvq8n2ca/image/upload/v1687828596/zzr14emaxohpzllyzlat.webp" target="_blank" rel="noopener noreferrer">
                     <img id='img' src="https://res.cloudinary.com/dlvq8n2ca/image/upload/v1687828596/zzr14emaxohpzllyzlat.webp" alt="Ashish's Image" />
                 </a>
-                <h2 className='text-warning'>NEWSac.com</h2>
-                <h4 className='text-warning'>NEWSac is a news reading web app.</h4>
+                <h2 className='text-warning'>NEWSa2z.com</h2>
+                <h4 className='text-warning'>NEWSa2z is a news reading web app.</h4>
                 <button className='cancel px-2 rounded' onClick={() => setInfoDivShow(false)}>X</button>
 
                 <ul className='text-white'>
@@ -52,15 +52,15 @@ function HearderDiv({ getData, contentArr, setDataStatus, setContentArr, setTota
 
 
             {/* Main Header code here ----------> */}
-            <div className='d-sm-flex align-items-center justify-content-between px-4 py-2' >
+            <div className='d-flex flex-column flex-sm-row align-items-center justify-content-between px-4 py-2' >
                 <div >
                     <div onClick={()=>{repairHomePage()}} className='d-flex justify-content-start align-items-center my-1' id='web_name_div' >
                         <img className='icon_header' src="./news2.png" alt="Web Icon" />
-                        <h1 className='mt-1'>NEWSac.com</h1>
+                        <h1 className='mt-1'>NEWSa2z.com</h1>
                     </div>
 
                     <div className='d-flex align-items-start justify-content-start' style={{ marginTop: "-2vh" }}>
-                        <button  onClick={() => { setInfoDivShow(true) }} className='btn btn-sm btn-outline-dark py-0  px-1 me-1' >About</button>
+                        <button  onClick={() => { setInfoDivShow(true) }} className='btn btn-sm btn-outline-dark py-0  px-1 me-1 fw-bold' >About</button>
                         <h6 className=" text-center text-sm-start ">All latest NEWS here</h6>
                     </div>
 
