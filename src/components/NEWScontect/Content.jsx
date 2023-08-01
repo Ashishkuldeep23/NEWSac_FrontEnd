@@ -122,7 +122,7 @@ function Content() {
 
     } catch (err) {
       console.log(err);
-      return setDataStatus(`Data not Found , Error is :- ${err.message} &&&&&&&&&&& ${err.response.data.axiosMessage || "Error"} `);
+      return setDataStatus(`Data not Found , Error is :- ${err.message} &&& ${err?.response?.data?.axiosMessage || "Error"} `);
     }
   }
 
@@ -200,7 +200,6 @@ function Content() {
           style={{
             height: filterOnTop ? "100%" : "60vh",
             marginTop: filterOnTop ? "0" : "5vh",
-
             position: filterOnTop ? "unset" : "sticky",
             top: filterOnTop ? "unset" : "5vh",
             display: isSearchBoxOpen && "none"
@@ -265,7 +264,7 @@ function Content() {
                     name="from"
                     id="from"
                     onChange={(e) => {
-                      setSomeDataForQuery({ ...someDataForQuery, [e.target.name]: e.target.value })
+                      setSomeDataForQuery({ ...someDataForQuery, [e.target.name] : e.target.value })
                     }}
                   />
                 </div>
@@ -397,7 +396,7 @@ function Content() {
                             <div 
                               className="spinner-border fs-1 "  
                               role="status"
-                              style={ {height : "20vh" , width : '20vh'} }
+                              // style={ {height : "20vh" , width : '20vh'} }
                             >
                               <span className="visually-hidden">Loading...</span>
                             </div>

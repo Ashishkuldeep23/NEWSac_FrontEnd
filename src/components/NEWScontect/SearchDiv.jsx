@@ -95,7 +95,7 @@ function SearchDiv({ contentArr, setDataStatus, setContentArr, setTotalPagesAre,
             // // // Set result by search open or not---->
             setIsSearchBoxOpen(false)
             console.log(err);
-            setDataStatus(`Data not Found with this text :- ${searchText} , Please search for something else. &&&&&&&&&&& ${err.response.data.axiosMessage || "Error"} `);
+            setDataStatus(`Data not Found with this text :- ${searchText} , Please search for something else. &&& ${err?.response?.data?.axiosMessage || "Error"} `);
         }
 
 

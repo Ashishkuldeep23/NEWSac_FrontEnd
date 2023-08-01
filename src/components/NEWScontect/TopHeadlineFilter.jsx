@@ -103,13 +103,13 @@ function TopHeadlineFilter({ contentArr, getData, getAllQueriesOfFilter, filterO
     <div className="my-3">
       <h3 className="d-sm-inline me-2  text-center">Filter Articles</h3>
       <button
-        className="d-none d-sm-inline btn btn-danger btn-lg px-1 py-0"
+        className="d-none d-sm-inline btn btn-danger btn-lg btn-sm px-1 py-0"
         onClick={() => { setFilterOnTop(!filterOnTop) }}
       >
         {
           filterOnTop
-            ? <i className="fa-solid fa-hand-point-left"></i>
-            : <i className="fa-solid fa-hand-point-up"></i>
+            ? <i className="fa-solid fa-hand-point-left "></i> 
+            : <i className="fa-solid fa-hand-point-up "></i>
         }
 
       </button>
@@ -131,9 +131,6 @@ function TopHeadlineFilter({ contentArr, getData, getAllQueriesOfFilter, filterO
                     (el, i) => { return <option key={i} value={el}>{el}</option> }
                   )
                 }
-
-
-
 
               </select>
 
@@ -159,7 +156,6 @@ function TopHeadlineFilter({ contentArr, getData, getAllQueriesOfFilter, filterO
             </div>
 
             :
-
             <div className="">
               {
                 Array.from(Array(2), (el, i) => {
