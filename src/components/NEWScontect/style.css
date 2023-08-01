@@ -20,6 +20,11 @@
 }
 
 
+button:not(:disabled):hover{
+  box-shadow: 0px 2px 2px white, 2px 2px 2px white;
+}
+
+
 
 
 #main_container {
@@ -164,11 +169,15 @@
   transition: 250ms ease-in-out;
 }
 
-.singe_card:hover {
+
+.singe_card:not(:disabled):hover{
+  box-shadow: 2px 5px 5px #ffc107, 2px 5px 5px #ffc107;
+
   outline-offset: 0px;
   /* border: 2px solid black; */
   transform: scale(1.02);
 }
+
 
 .singe_card:hover .title {
   color: red  !important;
