@@ -20,6 +20,11 @@
 }
 
 
+
+
+
+
+
 button:not(:disabled):hover{
   box-shadow: 0px 2px 2px white, 2px 2px 2px white;
 }
@@ -41,19 +46,19 @@ button:not(:disabled):hover{
 
 #info_div{
   position: absolute;
-  /* background-image: linear-gradient(120deg , lightpink , white , lightcyan , white ,lightpink ); */
+  left: 2.5%;
   width: 94%;
   text-align: center;
   z-index: 50;
   padding: 2vh 0;
-  border-top-right-radius: 1vh;
-  border-bottom-left-radius: 2vh;
-  border-bottom-right-radius: 2vh;
+  border-radius: 1.5vh;
 }
+
 
 #info_div strong{
   color: #ffc107;
 }
+
 
 #info_div  #img{
   position: absolute;

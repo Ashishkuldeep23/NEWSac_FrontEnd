@@ -228,7 +228,7 @@ function Content() {
           ref={dataDivRef}
         >
           {/* A Heading  */}
-          {(!isSearchBoxOpen) && <h3 className="text-center text-info text-decoration-underline">Today's Top News -: [{giveTodaysDate()}] </h3>}
+          {(!isSearchBoxOpen) && <h3 className="text-center text-info text-decoration-underline  fa-beat-fade">Today's Top News -: [{giveTodaysDate()}] </h3>}
 
 
           {/* Search filter ------------> */}

@@ -28,13 +28,21 @@ function HearderDiv({ getData, contentArr, setDataStatus, setContentArr, setTota
     return (
         <>
             {/* About Div code this this */}
-            <div className=' bg-dark border border-info border-2' id='info_div' style={{ display: !infoDivShow && "none" }}>
-                <a href="https://res.cloudinary.com/dlvq8n2ca/image/upload/v1687828596/zzr14emaxohpzllyzlat.webp" target="_blank" rel="noopener noreferrer">
+            <div className=' bg-dark border border-info border-2 animate__animated  animate__zoomInDown' id='info_div' style={{ display: !infoDivShow && "none" }}>
+                <a  
+                    href="https://res.cloudinary.com/dlvq8n2ca/image/upload/v1687828596/zzr14emaxohpzllyzlat.webp"       
+                    target="_blank" rel="noopener noreferrer"
+                >
                     <img id='img' src="https://res.cloudinary.com/dlvq8n2ca/image/upload/v1687828596/zzr14emaxohpzllyzlat.webp" alt="Ashish's Image" />
                 </a>
                 <h2 className='text-warning'>NEWSa2z.com</h2>
                 <h4 className='text-warning'>NEWSa2z is a news reading web app.</h4>
-                <button className='cancel px-2 rounded' onClick={() => setInfoDivShow(false)}>X</button>
+                <button 
+                    className='cancel px-2 rounded' 
+                    onClick={() => setInfoDivShow(false)}
+                >
+                    <i className="fa-solid fa-circle-xmark fa-bounce"></i>
+                </button>
 
                 <ul className='text-white'>
                     <li>This web app gives <strong>latest NEWS</strong> everytime.</li>
@@ -46,17 +54,24 @@ function HearderDiv({ getData, contentArr, setDataStatus, setContentArr, setTota
                     <li>
                         <a 
                             href="https://github.com/Ashishkuldeep23/NEWSac_FrontEnd" className='text-decoration-none fw-bold'
+                            target="_blank" rel="noopener noreferrer"
                         >GitHub</a>
                     </li>
                     <li>
                         <a 
                             href="https://newsac-latest-news-free.vercel.app/" className='text-decoration-none fw-bold'
+                            target="_blank" rel="noopener noreferrer"
                         >Web App</a>
                     </li>
                     <li>Created by ❤️ Ashish Kuldeep</li>
                 </ul>
 
-                <input className='cancel rounded' type="button" value="Close" onClick={() => { setInfoDivShow(false) }} />
+                <input 
+                    className='cancel rounded fw-bold fa-solid fa-fade'                     
+                    type="button" 
+                    value="Close" 
+                    onClick={() => { setInfoDivShow(false) }}
+                 />
             </div>
 
 
@@ -69,7 +84,9 @@ function HearderDiv({ getData, contentArr, setDataStatus, setContentArr, setTota
                     </div>
 
                     <div className='d-flex align-items-start justify-content-start' style={{ marginTop: "-2vh" }}>
-                        <button  onClick={() => { setInfoDivShow(true) }} className='btn btn-sm btn-outline-dark py-0  px-1 me-1 fw-bold' >About</button>
+                        <button  onClick={() => { setInfoDivShow(true) }} className='btn btn-sm btn-outline-dark py-0  px-1  me-1 fw-bold' >
+                            <i className="fa-solid fa-bounce">I n f o</i> 
+                        </button>
                         <h6 className=" text-center text-sm-start ">All latest NEWS here</h6>
                     </div>
 
