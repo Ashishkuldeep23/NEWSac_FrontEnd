@@ -57,7 +57,7 @@ function SingleCardOfNews({
 
       <div className="px-2">
 
-        <h4 className="title mt-1 text-dark">{title || "Title of NEWS"}</h4>
+        <h4 className="title mt-2 text-dark">{title || "Title of NEWS"}</h4>
 
         <div className="side_by_side">
           <p className="author_of_article ">By-: {author || "Writer"}</p>
